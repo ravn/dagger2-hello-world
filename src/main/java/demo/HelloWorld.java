@@ -4,23 +4,27 @@ import dagger.Component;
 import dagger.Provides;
 import dagger.Module;
 
-import java.util.concurrent.Callable;
+interface MessageGetter {
+    String getMessage();
+}
 
 public class HelloWorld {
     public static void main(String[] args) throws Exception {
-        System.out.println(DaggerHelloWorld_OurComponent.builder().build().getCallable().call());
+        HelloWorldComponent component = DaggerHelloWorld_HelloWorldComponent.builder().build();
+        MessageGetter messageGetter = component.messageGetter();
+        System.out.println(messageGetter.getMessage());
     }
 
-    @Component(modules = OurModule.class)
-    interface OurComponent {
-        Callable getCallable();
+    @Component(modules = HelloWorldModule.class)
+    interface HelloWorldComponent {
+        MessageGetter messageGetter();
     }
-}
 
-@Module
-class OurModule {
-    @Provides
-    Callable getHelloWorld() {
-        return () -> "Hello World";
+    @Module
+    class HelloWorldModule {
+        @Provides
+        MessageGetter provideMessageGetter() {
+            return () -> "Hello World";
+        }
     }
 }
