@@ -19,12 +19,12 @@ public class HelloWorld {
     interface HelloWorldComponent {
         MessageGetter messageGetter();
     }
+}
 
-    @Module
-    class HelloWorldModule {
-        @Provides
-        MessageGetter provideMessageGetter() {
-            return () -> "Hello World";
-        }
+@Module
+class HelloWorldModule {
+    @Provides
+    MessageGetter provideMessageGetter() {
+        return () -> "Hello World";
     }
 }
