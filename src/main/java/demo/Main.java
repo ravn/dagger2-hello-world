@@ -10,18 +10,21 @@ interface HelloWorld {
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        HelloWorld helloWorld = DaggerMain_HelloWorldComponent.builder().build().helloWorld();
+    	// If compilation fails, see README.md
+        HelloWorldComponent daggerGeneratedComponent = DaggerMain_HelloWorldComponent.builder().build();
+		
+        HelloWorld helloWorld = daggerGeneratedComponent.helloWorld();
         System.out.println(helloWorld.getMessage());
     }
 
+    // What do we need?
     @Component(modules = HelloWorldModule.class)
     interface HelloWorldComponent {
         HelloWorld helloWorld();
     }
-
 }
 
-@Module
+@Module // How do we make what is needed? (Except classes with @Inject constructor)
 class HelloWorldModule {
     @Provides
     HelloWorld provideHelloWorld() {
