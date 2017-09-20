@@ -1,6 +1,30 @@
 This project is a single file Hello World Dagger-2 Java 8 Maven
 project.  The idea was to demonstrate the minimal amount of work
-needed.
+required as the official documentation is targetted towards more
+experienced programmers, in other words _not_ a tutorial.
+
+A quick summary of Main.java:
+
+1. The `@Module` part contains `@Provides` methods that Dagger can
+invoke to get what it needs.  These methods can take arguments (but
+doesn't in this example) which Dagger recursively does the same with
+to satisfy.  If the constructor of a class is properly annotated with
+`@Inject` Dagger can invoke the constructor directly without a
+Provider.  
+
+1. The `@Component` part describes the actual interface Dagger is to
+provide a functional instance of, as well as the modules that Dagger
+should use to do so.  Modules not indicated here, are not considered.
+
+1. The `main(...)` method invokes the source automatically generated
+by Dagger during compilation to get a component where the methods
+return objects created by Dagger.  The `helloWorld()` method is invoked to
+get a `HelloWorld` object, where the `getMessage()` method returns 
+"Hello World".
+
+Dagger 2 can do much more than this.  The real advantage compared to Guice,
+Weld and others are that this happens at compile-time instead of run-time so
+the compiler can help you!
 
 Tested with Intellij 2017 (File -> Open), Eclipse 4.6.3 (File->
 Import... -> Maven -> Existing Maven Projects ; Eclipse _must_ have
