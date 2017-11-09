@@ -1,5 +1,5 @@
-This project is a single file Hello World Dagger-2 Java 8 Maven
-project.  The idea was to demonstrate the minimal amount of work
+This project is a single file Hello World Dagger-2 Maven
+project for Java 8 and 9.  The idea was to demonstrate the minimal amount of work
 required as the official documentation is targetted towards more
 experienced programmers, in other words _not_ a tutorial.
 
