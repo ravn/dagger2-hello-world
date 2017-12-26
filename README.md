@@ -1,30 +1,40 @@
-This project is a single file Hello World Dagger-2 Maven
-project for Java 8 and 9.  The idea was to demonstrate the minimal amount of work
-required as the official documentation is targetted towards more
-experienced programmers, in other words _not_ a tutorial.
+This project is a single file Hello World Dagger-2 Maven project for
+Java 8 and 9.  The idea was to demonstrate the minimal amount of work
+required as the official documentation at
+https://google.github.io/dagger/users-guide is targetted towards more
+experienced programmers. In other words this is _not_ a tutorial.
 
 A quick summary of Main.java:
 
-1. The `@Module` part contains `@Provides` methods that Dagger can
-invoke to get what it needs.  These methods can take arguments (but
-doesn't in this example) which Dagger recursively does the same with
-to satisfy.  If the constructor of a class is properly annotated with
-`@Inject` Dagger can invoke the constructor directly without a
-Provider.  
+1. First we define the `HelloWorld` interface which is what our code
+is concerned about.  All the rest of the code is for helping Dagger to
+create an object implementing this interface so we can invoke its
+methods with all injections in place.  This interface only contains a
+single method but may contain many.
+
+1. Dagger can automatically create an object it needs if its
+constructor has a `@Inject` annotation or fields with `@Inject`
+annotations.  For other objects Dagger use one or more modules (each
+annotated with `@Module`) which contain methods each return one of the
+needed objects.  These methods are called providers and are annotated
+with `@Provides`.  These methods can take arguments (but doesn't in
+this example) which Dagger recursively does the same with to satisfy.
 
 1. The `@Component` part describes the actual interface Dagger is to
 provide a functional instance of, as well as the modules that Dagger
-should use to do so.  Modules not indicated here, are not considered.
+should use to do so.  Modules not indicated here are not considered.
+Methods in here are the one Dagger starts with to figure out the
+dependency tree.
 
 1. The `main(...)` method invokes the source automatically generated
 by Dagger during compilation to get a component where the methods
-return objects created by Dagger.  The `helloWorld()` method is invoked to
-get a `HelloWorld` object, where the `getMessage()` method returns 
-"Hello World".
+return objects created by Dagger.  The `helloWorld()` method is
+invoked to get an object implementing the `HelloWorld` interface,
+where the `getMessage()` method returns "Hello World".
 
-Dagger 2 can do much more than this.  The real advantage compared to Guice,
-Weld and others are that this happens at compile-time instead of run-time so
-the compiler can help you!
+Dagger 2 can do much more than this.  The real advantage compared to
+Guice, Weld and others are that this happens at compile-time instead
+of run-time so the compiler can help you!
 
 Tested with Intellij 2017 (File -> Open), Eclipse 4.6.3 (File->
 Import... -> Maven -> Existing Maven Projects ; Eclipse _must_ have
@@ -41,7 +51,7 @@ To run from the command line:
 
     mvn -q exec:java
 
-Note: Eclipse requires enabling annotation processor support installed
+Note: Eclipse requires having annotation processor support installed
 and enabled!  The m2e-apt plugin can be downloaded from the Eclipse
 Marketplace or https://marketplace.eclipse.org/content/m2e-apt (which
 also has configuration instructions).  Ensure that Preferences ->
