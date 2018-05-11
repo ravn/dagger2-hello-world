@@ -64,8 +64,9 @@ create an object implementing this interface so we can invoke its
 methods with all injections in place.  This interface only contains a
 single method but may contain many.
 
-```
+```java
 /* HelloWorld belongs to our "own" code. */
+
 package demo;
 
 interface HelloWorld { // Our work unit.
@@ -89,7 +90,7 @@ If this for any reason is not the case, Dagger needs help in the form of modules
 * It is good practice to provide good javadoc and parameter value checks in the provider method.
 * As of the time of writing I have not yet figured out how to correctly handle Singletons.
 
-```
+```java
 /* Help Dagger make a HelloWorld instance */
 
 @dagger.Module
@@ -123,7 +124,7 @@ The `main(...)` method does:
 1. Print out the value of `helloWorld.getMessage()`.  As expected this isn't null but "Hello World".
 
 
-```
+```java
 /* HelloWorldComponent lists needed modules and has methods returning what we need */
 
 public class Main {
