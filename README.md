@@ -1,13 +1,30 @@
-/* (Note: This is a valid Java source file)
+/*
 
 Dagger 2 Hello World
 ===
 
+[//]: # (Important:  As an experiment Main.java is also a valid markdown file copied unmodified to README.md, so only edit Main.java)
+
+For the impatient:
+---
+
+    mvn -q clean package exec:java
+
+outputs "Hello World".
+
+
+Background:
+---
+
 This project is a single file Hello World Dagger-2 Maven project for
-Java 8 and later.  The idea was to demonstrate the minimal amount of work
-required as the official documentation at
+Java 8 and later.
+
+The idea is to demonstrate the minimal amount of work
+required to create a small command line application, as the official documentation at
 https://google.github.io/dagger/users-guide is targetted towards more
-experienced programmers. In other words this is _not_ a full Dagger tutorial.
+experienced programmers. In other words, this is _not_ a full Dagger tutorial.
+
+
 
 The major difference between Dagger and most other Dependency Injection frameworks
 is that Dagger does all its heavy lifting in the compilation phase instead of at runtime.
@@ -15,7 +32,7 @@ This mean that Dagger can report problems as compilation errors instead of faili
 at startup time.
 
 This file contains is a minimal but fully functional Dagger enabled
-Maven command line application:
+Maven command line application.   There are several parts:
 
 1. An interface belonging to our code that Dagger can created injected instances of.
 
@@ -28,10 +45,10 @@ Maven command line application:
 
 1. A main method showing how to wire things together.
 
-This file is both the Java source file as well as valid Markdown.  It is an
-experiment in seeing if the Literate Programming principles can be made usable with
-Java which doesn't have a preprocessor.  The `/*` at the end of a code snippet
-is necessary to do this.
+Note:  It is also a proof-of-concept that using markdown in comments can be used to present complex ideas
+   in real live code (much like Literate Programming) for github projects.
+
+Please report back on code as well as documentation issues!
 
 ## Getting the code to run:
 
