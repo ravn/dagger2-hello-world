@@ -48,6 +48,7 @@
                 </configuration>
             </plugin>
             <!-- README.md is a copy of Main.java -->
+<!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
@@ -67,6 +68,7 @@
                     </execution>
                 </executions>
             </plugin>
+-->
         </plugins>
     </build>
 </project>
