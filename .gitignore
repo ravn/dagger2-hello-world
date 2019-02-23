@@ -13,3 +13,5 @@ dagger2-hello-world.iml
 /.project
 /.settings/
 /*.iml
+*~
+
