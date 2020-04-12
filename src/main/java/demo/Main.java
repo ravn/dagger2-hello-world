@@ -6,7 +6,7 @@ Dagger 2 Hello World
 [//]: # (Important:  As an experiment Main.java is also a valid markdown file copied unmodified to README.md, so only edit Main.java)
 
 This project is a single file Hello World Dagger-2 Maven project for
-Java 8 and later.
+Java 8 and later, while also being its own documentation written in Markdown.
 
 
 Getting up and running:
