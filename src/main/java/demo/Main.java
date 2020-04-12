@@ -34,23 +34,26 @@ is badly needed).
 The major difference between Dagger and most other Dependency Injection frameworks
 is that Dagger does all its heavy lifting in the compilation phase instead of at runtime.
 This mean that Dagger can report problems as compilation errors instead of failing
-at startup time.
+at startup time, and you are ensured that the program will function as expected 
+at runtime.  This is a very powerful property.
 
 This file contains is a minimal but fully functional Dagger enabled
 Maven command line application.   There are several parts:
 
-1. An interface belonging to our code that Dagger can created injected instances of.
+1. One (or more) normal Java interfaces belonging to our code.  Dagger will be asked to create instances of these interfaces with 
+   injected values.
+   
+1. A Dagger _module_ providing code that can create those objects Dagger cannot create by itself 
+   using its built-in heuristics.
 
-1. A "module" describing how to create those objects Dagger cannot create by itself.
-
-1. A "component" is an interface with a method for getting instances of our interface
-   annotated with the modules Dagger needs.  During compilation
+1. A Dagger _component_ is an interface with a method for for getting an instance of one of the interfaces 
+   mentioned above annotated with the Dagger modules needed for resolving all dependencies.  During compilation
    Dagger figures out how to wire things together and writes
-   the Java source files needed.
+   Java source files according to Maven conventions that create these populated instances.
 
 1. A main method showing how to wire things together.
 
-Note:  It is also a proof-of-concept that using markdown in comments can be used to present complex ideas
+Note:  This is also a proof-of-concept that using markdown in comments can be used to present complex ideas
    in real live code (much like Literate Programming) for github projects.
 
 Please report back on code as well as documentation issues!
@@ -76,10 +79,11 @@ interface HelloWorld { // Our work unit.
 /*
 ```
 
-In order to fulfill dependencies Dagger needs to have object instances given their classes.
+In order to fulfill dependencies Dagger needs to create object instances given only their classes.
 
 Dagger can do this on its own if the class has exactly one constructor annotated with `@Inject`
-(where the parameters are also considered dependencies so Dagger provides them to the constructor).
+(where the parameters are also considered dependencies resolved recursively 
+so Dagger provides them to the constructor).
 
 If this for any reason is not the case, Dagger needs help in the form of modules which contain "provider methods"
 (as they are annotated with `@dagger.Provides`).
@@ -133,7 +137,7 @@ public class Main {
         HelloWorld helloWorld();
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         // If compilation fails, see README.md
         HelloWorldComponent daggerGeneratedComponent = DaggerMain_HelloWorldComponent.builder().build();
 
