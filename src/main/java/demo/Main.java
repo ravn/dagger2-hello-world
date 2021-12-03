@@ -5,7 +5,7 @@ Dagger 2 Hello World
 
 [//]: # (Important:  As an experiment Main.java is also a valid markdown file copied unmodified to README.md, so only edit Main.java)
 
-This project is a single file Hello World Dagger-2 Maven project for
+This project is a single file Greeting World Dagger-2 Maven project for
 Java 8 and later, while also being its own documentation written in Markdown.
 
 
@@ -16,8 +16,7 @@ Getting up and running:
 
 outputs "Hello World".
 
-[Project works with Netbeans 8.2, Intellij 2017 and Eclipse 4.6.2 with m2e_apt.](TROUBLESHOOTING.md)
-
+[2018: Project works with Netbeans 8.2, Intellij 2017 and Eclipse 4.6.2 with m2e_apt. 2021: Project works with Java 17 and IntelliJ 2021.3](TROUBLESHOOTING.md)
 
 Background:
 ---
@@ -25,7 +24,7 @@ Background:
 
 This project demonstrates the minimal amount of work
 required to create a small command line application, as the official documentation at
-https://google.github.io/dagger/users-guide is targetted towards more
+https://google.github.io/dagger/users-guide is targeted towards more
 experienced programmers. In other words, this is _not_ a full Dagger tutorial (which unfortunately
 is badly needed).
 
@@ -46,34 +45,37 @@ Maven command line application.   There are several parts:
 1. A Dagger _module_ providing code that can create those objects Dagger cannot create by itself 
    using its built-in heuristics.
 
-1. A Dagger _component_ is an interface with a method for for getting an instance of one of the interfaces 
+1. A Dagger _component_ is an interface with a method for getting an instance of one of the interfaces
    mentioned above annotated with the Dagger modules needed for resolving all dependencies.  During compilation
    Dagger figures out how to wire things together and writes
    Java source files according to Maven conventions that create these populated instances.
 
-1. A main method showing how to wire things together.
+1. A main method showing how to wire things together, including passing a parameter into provided code.
+
+For clarity all Dagger related names are fully qualified.
 
 Note:  This is also a proof-of-concept that using markdown in comments can be used to present complex ideas
-   in real live code (much like Literate Programming) for github projects.
+   in real live code (inspired by literate programs in Haskell) for github projects.  The trick is to have README.md be
+   a symbolic link to the Java source file.
 
 Please report back on code as well as documentation issues!
 
 
 ## Main.java
 
-First we define the `HelloWorld` interface which is what our code
+First we define the `Greeting` interface which is what our code
 is concerned about.  All the rest of the code is for helping Dagger to
 create an object implementing this interface so we can invoke its
 methods with all injections in place.  This interface only contains a
 single method but may contain many.
 
 ```java
-/* HelloWorld belongs to our "own" code. */
+/* GreetingWorld belongs to our "own" code. */
 
 package demo;
 
-interface HelloWorld { // Our work unit.
-    String getMessage();
+interface Greeting { // Our work unit.
+    String getMessage(String s);
 }
 
 /*
@@ -95,13 +97,13 @@ If this for any reason is not the case, Dagger needs help in the form of modules
 * As of the time of writing I have not yet figured out how to correctly handle Singletons.
 
 ```java
-/* Help Dagger make a HelloWorld instance */
+/* Help Dagger make a Greeting instance */
 
 @dagger.Module
-class HelloWorldModule {
+class GreetingModule {
     @dagger.Provides
-    HelloWorld provideHelloWorld() {
-        return () -> "Hello World";
+    Greeting provideGreeting() {
+        return s -> "Hello " + s;
     }
 }
 
@@ -123,25 +125,25 @@ exist in the classpath.
 The `main(...)` method does:
 
 1. Invokes the class written by Dagger during compilation implementing our dependency graph to get a "magic" component.
-1. Invoke the `helloWorld()` method on the magic component to get an object implementing the `HelloWorld` interface.  Our configuration specified
-   that we wanted an instance where `getMessage()` returned "Hello World".
-1. Print out the value of `helloWorld.getMessage()`.  As expected this isn't null but "Hello World".
+1. Invoke the `Greeting()` method on the magic component to get an object implementing the `Greeting` interface.  Our configuration specified
+   that we wanted an instance where `getMessage("X")` returned "Greeting X".
+1. Print out the value of `Greeting.getMessage("World")`.  As expected this isn't null but "Hello World".
 
 
 ```java
-/* HelloWorldComponent lists needed modules and has methods returning what we need */
+/* GreetingComponent lists needed modules and has methods returning what we need */
 
 public class Main {
-    @dagger.Component(modules = HelloWorldModule.class)
-    interface HelloWorldComponent {
-        HelloWorld helloWorld();
+    @dagger.Component(modules = GreetingModule.class)
+    interface GreetingComponent {
+        Greeting Greeting();
     }
 
     public static void main(String[] args) {
         // If compilation fails, see README.md
-        HelloWorldComponent daggerGeneratedComponent = DaggerMain_HelloWorldComponent.builder().build();
+        GreetingComponent daggerGeneratedComponent = DaggerMain_GreetingComponent.builder().build();
 
-        HelloWorld helloWorld = daggerGeneratedComponent.helloWorld();
-        System.out.println(helloWorld.getMessage());
+        Greeting Greeting = daggerGeneratedComponent.Greeting();
+        System.out.println(Greeting.getMessage("World"));
     }
 }
