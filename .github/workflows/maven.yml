@@ -22,5 +22,5 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
-    - name: Build with Maven
+    - name: Show "Hello World" Greeting!
       run: mvn -B -q clean package exec:java --file pom.xml
