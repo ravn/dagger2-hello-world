@@ -16,7 +16,7 @@ Getting up and running:
 
 outputs "Hello World".
 
-[2018: Project works with Netbeans 8.2, Intellij 2017 and Eclipse 4.6.2 with m2e_apt. 2021: Project works with Java 17 and IntelliJ 2021.3](TROUBLESHOOTING.md)
+[2018: Project works with Netbeans 8.2, Intellij 2017 and Eclipse 4.6.2 **with m2e_apt**. 2021: Project works with Java 17 and IntelliJ 2021.3. 2022: Java 17 and Visual Studio Code ](TROUBLESHOOTING.md)
 
 Background:
 ---
@@ -136,14 +136,14 @@ The `main(...)` method does:
 public class Main {
     @dagger.Component(modules = GreetingModule.class)
     interface GreetingComponent {
-        Greeting Greeting();
+        Greeting greeting();
     }
 
     public static void main(String[] args) {
         // If compilation fails, see README.md
         GreetingComponent daggerGeneratedComponent = DaggerMain_GreetingComponent.builder().build();
 
-        Greeting Greeting = daggerGeneratedComponent.Greeting();
+        Greeting Greeting = daggerGeneratedComponent.greeting();
         System.out.println(Greeting.getMessage("World"));
     }
 }
