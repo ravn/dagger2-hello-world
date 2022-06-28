@@ -27,4 +27,4 @@ jobs:
         distribution: ${{ matrix.distribution }}
         cache: maven
     - name: Show "Hello World" greeting!
-      run: mvn -B -q clean package exec:java --file pom.xml
+      run: mvn -B clean package exec:java --file pom.xml
