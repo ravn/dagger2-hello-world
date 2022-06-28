@@ -2,22 +2,27 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.users.ravn.dagger2</groupId>
-    <artifactId>dagger2-maven-hello-world</artifactId>
+    <artifactId>dagger2-hello-world</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>Dagger 2 Hello World Maven project</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <dagger.plugin.version>2.42</dagger.plugin.version>
+    </properties>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/com.google.dagger/dagger -->
         <dependency>
             <groupId>com.google.dagger</groupId>
             <artifactId>dagger</artifactId>
-            <version>2.40.3</version>
+            <version>${dagger.plugin.version}</version>
         </dependency>
         <dependency>
             <groupId>com.google.dagger</groupId>
             <artifactId>dagger-compiler</artifactId>
-            <version>2.40.3</version>
+            <version>${dagger.plugin.version}</version>
             <optional>true</optional>
         </dependency>
     </dependencies>
@@ -25,9 +30,10 @@
     <build>
         <plugins>
             <plugin>
+                <!-- https://www.mojohaus.org/exec-maven-plugin/usage.html -->
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
-                <version>1.6.0</version>
+                <version>3.0.0</version>
                 <executions>
                     <execution>
                         <goals>
@@ -42,7 +48,7 @@
             <plugin>
                 <!-- https://maven.apache.org/plugins/maven-compiler-plugin/usage.html -->
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>3.10.1</version>
                 <configuration>
                     <source>8</source>
                     <target>8</target>

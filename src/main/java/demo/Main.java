@@ -18,12 +18,15 @@ outputs "Hello World".
 
 [2018: Project works with Netbeans 8.2, Intellij 2017 and Eclipse 4.6.2 **with m2e_apt**. 2021: Project works with Java 17 and IntelliJ 2021.3. 2022: Java 17 and Visual Studio Code ](TROUBLESHOOTING.md)
 
+Github Actions have been added in 2022 that run with Java 11 and Java 17.
+
+
 Background:
 ---
 
 
 This project demonstrates the minimal amount of work
-required to create a small command line application, as the official documentation at
+required to create a small daggerized command line application, as the official documentation at
 https://google.github.io/dagger/users-guide is targeted towards more
 experienced programmers. In other words, this is _not_ a full Dagger tutorial (which unfortunately
 is badly needed).
