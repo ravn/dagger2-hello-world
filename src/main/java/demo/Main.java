@@ -78,7 +78,7 @@ single method but may contain many.
 package demo;
 
 interface Greeting { // Our work unit.
-    String getMessage(String s);
+    String greetingFor(String s);
 }
 
 /*
@@ -128,9 +128,9 @@ exist in the classpath.
 The `main(...)` method does:
 
 1. Invokes the class written by Dagger during compilation implementing our dependency graph to get a "magic" component.
-1. Invoke the `Greeting()` method on the magic component to get an object implementing the `Greeting` interface.  Our configuration specified
-   that we wanted an instance where `getMessage("X")` returned "Greeting X".
-1. Print out the value of `Greeting.getMessage("World")`.  As expected this isn't null but "Hello World".
+1. Invoke the `greeting()` method on the magic component to get an object implementing the `Greeting` interface.  Our configuration specified
+   that we wanted an instance where `greetingFor("X")` returned "Hello X".
+1. Print out the value of `helloGreeting.greetingFor("World")`.  As expected this isn't null but "Hello World".
 
 
 ```java
@@ -146,7 +146,7 @@ public class Main {
         // If compilation fails, see README.md
         GreetingComponent daggerGeneratedComponent = DaggerMain_GreetingComponent.builder().build();
 
-        Greeting Greeting = daggerGeneratedComponent.greeting();
-        System.out.println(Greeting.getMessage("World"));
+        Greeting helloGreeting = daggerGeneratedComponent.greeting();
+        System.out.println(helloGreeting.greetingFor("World"));
     }
 }
