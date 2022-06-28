@@ -19,12 +19,12 @@ jobs:
         distribution: [temurin, microsoft]
     steps:
     - uses: actions/checkout@v3
-    - name: Set up JDK 11
+    - name: Set up JDK
       uses: actions/setup-java@v3
       with:
         # https://github.com/actions/setup-java
         java-version: ${{ matrix.version }}
         distribution: ${{ matrix.distribution }}
         cache: maven
-    - name: Show "Hello World" Greeting!
+    - name: Show "Hello World" greeting!
       run: mvn -B -q clean package exec:java --file pom.xml
