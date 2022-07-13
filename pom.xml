@@ -4,12 +4,13 @@
     <groupId>com.github.users.ravn.dagger2</groupId>
     <artifactId>dagger2-hello-world</artifactId>
     <packaging>jar</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
     <name>Dagger 2 Hello World Maven project</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <dagger.plugin.version>2.42</dagger.plugin.version>
+        <exec.mainClass>demo.Main</exec.mainClass>
     </properties>
 
     <dependencies>
@@ -29,22 +30,8 @@
 
     <build>
         <plugins>
-            <plugin>
-                <!-- https://www.mojohaus.org/exec-maven-plugin/usage.html -->
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>3.0.0</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>java</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <mainClass>demo.Main</mainClass>
-                </configuration>
-            </plugin>
+            <!-- https://www.mojohaus.org/exec-maven-plugin/usage.html -->
+
             <plugin>
                 <!-- https://maven.apache.org/plugins/maven-compiler-plugin/usage.html -->
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -52,6 +39,23 @@
                 <configuration>
                     <source>8</source>
                     <target>8</target>
+                </configuration>
+            </plugin>
+            <!-- needed for jdeploy - https://docs.spring.io/spring-boot/docs/current/maven-plugin/reference/htmlsingle/#packaging -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.4.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>${exec.mainClass}</mainClass>
+                    <layout>ZIP</layout>
                 </configuration>
             </plugin>
         </plugins>

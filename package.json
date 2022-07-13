@@ -1,0 +1,23 @@
+{
+    "bin": {"dagger2-hello-world": "jdeploy-bundle/jdeploy.js"},
+    "author": "thorbjoern@gmail.com",
+    "description": "Dagger demo project",
+    "main": "index.js",
+    "preferGlobal": true,
+    "repository": "",
+    "version": "0.0.1-SNAPSHOT",
+    "jdeploy": {
+        "jdk": false,
+        "javaVersion": "11",
+        "javafx": false,
+        "title": "Dagger2 Hello World"
+    },
+    "dependencies": {
+        "njre": "^0.2.0",
+        "shelljs": "^0.8.4"
+    },
+    "license": "Apache",
+    "name": "dagger2-hello-world",
+    "files": ["jdeploy-bundle"],
+    "scripts": {"test": "echo \"Error: no test specified\" && exit 1"}
+}
